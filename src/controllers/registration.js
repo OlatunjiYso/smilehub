@@ -33,7 +33,7 @@ static async registerUser(req, res) {
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    let newRecord = await knex(accountsTable)
+    let newRecord = await knex(usersTable)
     .returning('user_id')
     .insert({ email, password: hashedPassword });
 

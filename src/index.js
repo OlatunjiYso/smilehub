@@ -19,5 +19,5 @@ app.use('/auth', authHandler);
 
 
 app.listen(8000, () => {
-  console.log("server running on localhost:5556");
+  console.log("server running on localhost:8000");
 });

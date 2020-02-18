@@ -10,6 +10,12 @@ class Registration {
   static validateRegistration(req, res, next) {
     let { firstname, lastname, email, password } = req.body;
     let errors = [];
+    if (!phone) {
+      errors.push('phone number is required')
+    }
+    if (phone && (validator.isEmpty(phone) || !validator.isMobilePhone(phone, 'en-NG'))) {
+      errors.push('please provide a valid phone number')
+    }
     if (!firstname) {
       errors.push('firstname is required')
     }
