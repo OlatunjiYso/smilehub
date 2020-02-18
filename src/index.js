@@ -5,6 +5,7 @@ import "regenerator-runtime/runtime";
 
 import authHandler from './routes/auth';
 import registrationHandler from './routes/registration';
+import walletHandler from './routes/wallet';
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/register', registrationHandler);
 app.use('/auth', authHandler);
+app.use('/wallet', walletHandler);
 
 
 

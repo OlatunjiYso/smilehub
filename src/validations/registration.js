@@ -8,7 +8,7 @@ import generalValidations from '../validations/general';
 class Registration {
 
   static validateRegistration(req, res, next) {
-    let { firstname, lastname, email, password } = req.body;
+    let { firstname, lastname, email, password, phone } = req.body;
     let errors = [];
     if (!phone) {
       errors.push('phone number is required')
