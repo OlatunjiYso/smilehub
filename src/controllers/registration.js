@@ -2,7 +2,7 @@ import bcrypt    from 'bcryptjs';
 import knex from '../knex';
 import jwt from 'jsonwebtoken';
 
-import { usersTable, transactionsTable } from '../tables';
+import { usersTable } from '../tables';
 
 
 const jwtKey = process.env.JWT_SECRET_KEY
@@ -20,7 +20,7 @@ const jwtKey = process.env.JWT_SECRET_KEY
  * @param { object } res response object
  */
 static async registerUser(req, res) {
-  let { firstname, lastname, email, password } = req.body;
+  let { firstname, lastname, email, phone, password } = req.body;
 
   try {
     let userRecord = await knex(usersTable).where({ email }).select('*');
@@ -33,9 +33,9 @@ static async registerUser(req, res) {
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    let newRecord = await knex(accountsTable)
+    let newRecord = await knex(usersTable)
     .returning('user_id')
-    .insert({ email, password: hashedPassword });
+    .insert({ email, firstname, lastname, phone, password: hashedPassword });
 
     const token = jwt.sign({ id: newRecord[0], email }, jwtKey);
 
