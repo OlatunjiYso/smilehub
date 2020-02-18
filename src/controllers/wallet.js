@@ -20,14 +20,15 @@ class Wallet {
     amount = parseInt(amount);
     try {
       let userId = await knex(usersTable).where({ email }).select('user_id');
-      userId = userId[0]['user_id'];
-      if (!userId) {
+      
+      if (userId.length === 0) {
         return res.status(404)
           .json({
             msg: 'no user with specified email exists'
           })
       }
 
+      userId = userId[0]['user_id'];
       let userTransactions = await knex(transactionsTable).where({ user_id: userId }).select('closing_balance');
       let previousTransactions = userTransactions.length;
 
@@ -97,13 +98,15 @@ class Wallet {
 
     try {
       let userId = await knex(usersTable).where({ email }).select('user_id');
-      userId = userId[0].user_id;
-      if (!userId) {
+      
+      if (userId.length === 0) {
         return res.status(404)
           .json({
             msg: 'no user with specified email exists'
           })
       }
+
+      userId = userId[0].user_id;
       let userTransactions = await knex.select('*').from(transactionsTable).leftJoin(usersTable, `${transactionsTable}.user_id`, `${usersTable}.user_id`).where({ 'transactions.user_id': userId });
       let previousTransactions = userTransactions.length;
 
@@ -147,13 +150,15 @@ class Wallet {
 
     try {
       let userId = await knex(usersTable).where({ email }).select('user_id');
-      userId = userId[0].user_id;
-      if (!userId) {
+      
+      if (userId.length === 0) {
         return res.status(404)
           .json({
             msg: 'no user with specified email exists'
           })
       }
+      
+      userId = userId[0].user_id;
       let userTransactions = await knex.select('*').from(transactionsTable).leftJoin(usersTable, `${transactionsTable}.user_id`, `${usersTable}.user_id`).where({ 'transactions.user_id': userId });
       let previousTransactions = userTransactions.length;
 
