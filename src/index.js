@@ -20,6 +20,6 @@ app.use('/wallet', walletHandler);
 
 
 
-app.listen(8000, () => {
-  console.log("server running on localhost:8000");
+app.listen(process.env.PORT, () => {
+  console.log(`server running on localhost: ${process.env.PORT}`);
 });
