@@ -10,12 +10,14 @@ authenticate;
 
 walletHandler.post(
   '/transact',
+  validations.validateEmail,
   validations.validateTransaction,
   controller.transact
 );
 
 walletHandler.get(
   '/balance',
+  validations.validateEmail,
   controller.getBalance
 )
 
