@@ -4,9 +4,10 @@
   "description": "smilehub endpoints",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "babel src -d dist",
-    "start": "npm run build && nodemon dist/index.js",
-    "serve": "node dist/index.js"
+    "start:dev": "npm run build && nodemon dist/index.js --watch",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
